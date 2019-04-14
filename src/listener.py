@@ -12,7 +12,7 @@ import byteutil
 import socketserver
 from net import MSG_SIZE, reprTCPSocket, SHOW_NET_INFO
 
-MESSAGE_TERM = bytes(chr(3), 'utf-8')
+from Codes import MESSAGE_TERM
 
 
 class UDPListener(socketserver.BaseRequestHandler):

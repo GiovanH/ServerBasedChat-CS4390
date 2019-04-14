@@ -4,7 +4,7 @@ import traceback
 import socket
 # import timeout_decorator
 
-MESSAGE_TERM = bytes(chr(3), 'utf-8')
+from Codes import MESSAGE_TERM
 
 def newUDPSocket():
     """Get a new UDP socket."""

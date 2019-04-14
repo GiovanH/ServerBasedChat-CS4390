@@ -3,7 +3,6 @@
 from enum import Enum
 
 try:
-    raise ImportError
     from enum import auto
 except ImportError:
     # Not running python 3.6+
@@ -12,14 +11,13 @@ except ImportError:
     def auto():
         global _auto_i
         _auto_i += 1
-        if _auto_i == 3:  # Skip message term symbol
-            _auto_i += 1
         return _auto_i
 
 
 class Code(Enum):
     HELLO = auto()
     CHALLENGE = auto()
+    TERM = auto()
     RESPONSE = auto()
     AUTH_SUCCESS = auto()
     AUTH_FAIL = auto()
@@ -51,3 +49,6 @@ def codeno(i):
 
 def printCodes():
     print("\n".join(c.__str__() for c in Code))
+    
+MESSAGE_TERM = bytes([Code.TERM.value])
+
