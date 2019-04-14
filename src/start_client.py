@@ -20,7 +20,7 @@ def main():
     parser.add_argument("--id")
     args = parser.parse_args()
     
-    server = BaseServer(SERVER_IP, SERVER_UDP_PORT, SERVER_TCP_PORT)
+    server = BaseServer("localhost", SERVER_UDP_PORT, SERVER_TCP_PORT)
     if args.id:
         our_client_id = args.id
     else:

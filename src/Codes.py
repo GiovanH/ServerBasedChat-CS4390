@@ -3,6 +3,7 @@
 from enum import Enum
 
 try:
+    raise ImportError
     from enum import auto
 except ImportError:
     # Not running python 3.6+
