@@ -131,5 +131,7 @@ def tcpListen(sock, callback):
         except OSError as e:
             if e.errno == 9:  # Bad file descriptor
                 return
+            if e.errno == 10038:  # Client has been disconnected, thread can now end
+                return  
             else:
                 raise

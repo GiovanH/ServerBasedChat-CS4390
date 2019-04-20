@@ -452,7 +452,7 @@ class RunnableClient(BaseClient):
             print("History: No user specified.")
             return
         (client_id_b,) = args
-        print("History for " + client_id_b + ": \n")
+        print("History for " + client_id_b + ": ")
         self.sendTCP([
             Code.HISTORY_REQ,
             client_id_b
