@@ -32,6 +32,7 @@ class Code(Enum):
     HISTORY_REQ = auto()
     HISTORY_RESP = auto()
     DISCONNECT = auto()
+    DECLINED = auto()
 
     def __str__(self):
         return "\t".join(

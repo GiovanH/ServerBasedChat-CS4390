@@ -158,6 +158,10 @@ class RunnableClient(BaseClient):
         response, serv_address_udp = net.awaitUDP(sock, net.UDP_MSG_SIZE)
         code, rand = byteutil.bytes2message(response)
 
+        if code == Code.DECLINED.value:
+            print("Connection Declined.")
+            exit()
+
         assert code == Code.CHALLENGE.value, "Got non-challenge code {}".format(
             code)
 

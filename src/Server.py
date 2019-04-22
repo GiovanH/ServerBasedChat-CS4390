@@ -19,6 +19,8 @@ from pprint import pprint
 from prompt import Prompt
 from itertools import permutations
 
+import os
+import sys
 import crypto
 
 from Client import BaseClient as Client
@@ -301,18 +303,39 @@ class RunnableServer(BaseServer):
             print("Got Hello with client id", client_id)
             client = Client(client_id)
 
-            # Challenge client
+            found = 0
+            print("Subscribers:")
+            with open(os.path.join(sys.path[0], "SubscriberList.txt"), "r", newline="\n") as subfile:
+                for line in subfile:
+                    clientRead = line.strip()
+                    print(clientRead)
+                    if clientRead == client_id:
+                        print("Client is Valid")
+                        found = 1;
+
             self.challenge_handles[client.id] = rand = crypto.cRandom()
 
-            print("Sending challenge")
-            net.sendUDP(
-                sock,
-                byteutil.message2bytes([
-                    Code.CHALLENGE,
-                    rand
-                ]),
-                client_address
-            )
+            if found == 1:                
+                # Challenge client
+                print("Sending challenge")
+                net.sendUDP(
+                    sock,
+                    byteutil.message2bytes([
+                        Code.CHALLENGE,
+                        rand
+                    ]),
+                    client_address
+                )
+            else:
+                print("Not a subscriber")
+                net.sendUDP(
+                    sock,
+                    byteutil.message2bytes([
+                        Code.DECLINED,
+                        rand
+                    ]),
+                    client_address
+                )    
         elif code == Code.RESPONSE.value:
             (client_id, response) = args
             client = Client(client_id)
