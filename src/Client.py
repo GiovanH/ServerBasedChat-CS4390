@@ -305,6 +305,7 @@ class RunnableClient(BaseClient):
             self.session_id = sessid
 
             print("Chat started with user", clientid)
+            #print("Chat started with user", clientid, " session ", sessid)
 
             # try:
             #     self.ps.app.exit()
@@ -326,17 +327,24 @@ class RunnableClient(BaseClient):
             # self.prompt()
 
         elif code == Code.UNREACHABLE.value:
-            print("Cannot connect.")
+            (person,) = args
+            print("Cannot chat with " + person)
         elif code == Code.CHAT.value:
             (message,) = args
             print(formatChatMessage(self.session_partner, message, self.id))
         elif code == Code.HISTORY_RESP.value:
             # print("client got args" + repr(args))
-            (client_id_b, message, *rest) = args
+            #(client_id_b, message, *rest) = args
+
+            (sessNum, client_id_b, message, *rest) = args
+            if sessNum != "0": # Not end of a session
+                if sessNum != "-1": # Not empty history
+                    print("Session " + sessNum + ": ", end = "")
+                print(formatChatMessage(client_id_b, message))
+
             # print("msg only: "+ message)
             # print("msg split: " + messagef)
             # print("final hist msg: " + formatChatMessage(client_id_b, message))
-            print(formatChatMessage(client_id_b, message))
         else:
             print("No behavior for TCP code", code)
 

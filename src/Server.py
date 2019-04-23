@@ -195,6 +195,7 @@ class RunnableServer(BaseServer):
             print("Got TCP CHAT message")
             (message,) = args
             # print(message)
+            #sender = self.connections_by_id.get(client.id)
             recipient = self.connections_by_id.get(client.session_partner.id)
             if recipient:
                 session_id = getSessionId(client.id, client.session_partner.id)
@@ -209,9 +210,10 @@ class RunnableServer(BaseServer):
                 )
             else:
                 net.sendTCP(
-                    recipient,
+                    connection,
                     byteutil.message2bytes([
-                        Code.UNREACHABLE
+                        Code.UNREACHABLE,
+                        client.session_partner.id
                     ])
                 )
 
@@ -257,12 +259,17 @@ class RunnableServer(BaseServer):
                 net.sendTCP(
                     connection,
                     byteutil.message2bytes([
-                        Code.UNREACHABLE
+                        Code.UNREACHABLE,
+                        client_id_b
                     ])
                 )
                 return
 
         elif code == Code.END_REQUEST.value:
+            session_id = getSessionId(client.id, client.session_partner.id)
+            print("End session ", session_id)
+            history.endInstance(session_id) 
+            
             client_b = client.session_partner
             client.session_partner = None
             client_b.session_partner = None
@@ -273,7 +280,7 @@ class RunnableServer(BaseServer):
                         Code.END_NOTIF,
                         b'*',
                     ])
-                )
+                )  
         elif code == Code.HISTORY_REQ.value:
             (client_id_b,) = args
             session_id = getSessionId(client.id, client_id_b)
@@ -281,8 +288,10 @@ class RunnableServer(BaseServer):
 
             for hist in history.get(session_id):
                 print("Sending :" + repr(hist))
-                (cid, msg) = hist
-                resp = byteutil.message2bytes([Code.HISTORY_RESP, cid, msg])
+                #(cid, msg) = hist
+                #resp = byteutil.message2bytes([Code.HISTORY_RESP, cid, msg])
+                (sessNum, cid, msg) = hist
+                resp = byteutil.message2bytes([Code.HISTORY_RESP, sessNum, cid, msg])
                 print("In bytes: " + repr(resp));
                 net.sendTCP(connection, resp)
                 #net.sendTCP(
@@ -317,7 +326,7 @@ class RunnableServer(BaseServer):
                 # Challenge client
                 self.challenge_handles[client.id] = rand = crypto.cRandom()
 
-                print(str(client_id) + "is a subscriber, sending challenge")
+                print(str(client_id) + " is a subscriber, sending challenge")
                 net.sendUDP(
                     sock,
                     byteutil.message2bytes([

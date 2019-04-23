@@ -51,11 +51,11 @@ def getOwnIP():
     """Determine the best IP to listen/bind on.
     Returns some kind of object, probably.
     """
-    return ''
-    # for addrinfo in socket.getaddrinfo(socket.gethostname(), 0):
-    #     family, __, __, __, address = addrinfo
-    #         if family == socket.AddressFamily.AF_INET:
-    #             return address[0]
+    return '127.0.0.1' # Just use localhost address
+    #for addrinfo in socket.getaddrinfo(socket.gethostname(), 0):
+    #    family, __, __, __, address = addrinfo
+    #    if family == socket.AddressFamily.AF_INET:
+    #        return address[0]
 
 
 def sendUDP(sock, bytesmsg, dest_address):
