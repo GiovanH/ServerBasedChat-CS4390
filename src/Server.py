@@ -313,11 +313,11 @@ class RunnableServer(BaseServer):
                         print("Client is Valid")
                         found = 1;
 
-            self.challenge_handles[client.id] = rand = crypto.cRandom()
-
             if found == 1:                
                 # Challenge client
-                print("Sending challenge")
+                self.challenge_handles[client.id] = rand = crypto.cRandom()
+
+                print(str(client_id) + "is a subscriber, sending challenge")
                 net.sendUDP(
                     sock,
                     byteutil.message2bytes([
@@ -327,12 +327,12 @@ class RunnableServer(BaseServer):
                     client_address
                 )
             else:
-                print("Not a subscriber")
+                print(str(client_id) + " is not a subscriber")
                 net.sendUDP(
                     sock,
                     byteutil.message2bytes([
                         Code.DECLINED,
-                        rand
+                        b'*'
                     ]),
                     client_address
                 )    
