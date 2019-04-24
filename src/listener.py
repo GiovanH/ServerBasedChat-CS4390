@@ -31,7 +31,7 @@ class UDPListener(socketserver.BaseRequestHandler):
 
         bytesin = request[0]
 
-        # For the sake of internal consistancy, we are treating
+        # For the sake of internal consistency, we are treating
         # UDP messages like they might contain multiple messages,
         # like TCP.
 
