@@ -181,6 +181,7 @@ class RunnableServer(BaseServer):
             # return
             print("Got TCP DISCONNECT message")
             if client.session_partner:
+                print("Client disconnected while chat, sending end notification to " + client.session_partner.id)
                 net.sendTCP(
                     self.connections_by_id[client.session_partner.id],
                     byteutil.message2bytes([
@@ -254,7 +255,7 @@ class RunnableServer(BaseServer):
 
             except ValueError:
                 # Client B is not connected
-                print(self.clients_by_address.items())
+                #print(self.clients_by_address.items())
                 print("No such client availible")
                 net.sendTCP(
                     connection,
@@ -267,7 +268,7 @@ class RunnableServer(BaseServer):
 
         elif code == Code.END_REQUEST.value:
             session_id = getSessionId(client.id, client.session_partner.id)
-            print("End session ", session_id)
+            print("End session between " + client.id + " and " + client.session_partner.id)
             history.endInstance(session_id) 
             
             client_b = client.session_partner
@@ -287,13 +288,15 @@ class RunnableServer(BaseServer):
             print("History Request")
 
             for hist in history.get(session_id):
-                print("Sending :" + repr(hist))
+                print("Processing :" + repr(hist))
                 #(cid, msg) = hist
                 #resp = byteutil.message2bytes([Code.HISTORY_RESP, cid, msg])
                 (sessNum, cid, msg) = hist
-                resp = byteutil.message2bytes([Code.HISTORY_RESP, sessNum, cid, msg])
-                print("In bytes: " + repr(resp));
-                net.sendTCP(connection, resp)
+                #print("sessNum " + sessNum + " " + str(type(sessNum)))
+                if sessNum != '0':    
+                    resp = byteutil.message2bytes([Code.HISTORY_RESP, sessNum, cid, msg])
+                    print("Sending bytes: " + repr(resp));
+                    net.sendTCP(connection, resp)
                 #net.sendTCP(
                 #    connection,
                 #    byteutil.message2bytes([

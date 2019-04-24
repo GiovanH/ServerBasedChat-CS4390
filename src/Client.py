@@ -477,6 +477,7 @@ class RunnableClient(BaseClient):
         Args: client-id
         """
         (client_id_b,) = args
+        print("Initiating chat with " + client_id_b)
         self.sendTCP([
             Code.CHAT_REQUEST,
             client_id_b

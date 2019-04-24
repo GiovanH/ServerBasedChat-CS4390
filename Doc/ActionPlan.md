@@ -24,9 +24,9 @@ Team Members:
 | 4    | TCP Tunneling                      | SG, OC |            | IDE              | 2,3          | Ready to implement client-client messaging              | :ballot_box_with_check: |                                                              |
 | 5    | Chat sessions                      | SG                     |            |                  |              |                                                         | :ballot_box_with_check: |                                                              |
 | 6    | Client Prompt and Messaging        | SG                     |            | IDE              | 2,3,4        | Chat between clients can be performed                   | :ballot_box_with_check: |                                                              |
-| 7    | Server Session Handling            | SG                     |            | IDE              | 2,3,4,5      | Functional chat in place                                | :ballot_box_with_check: |                                                              |
+| 7    | Server Session Handling            | SG, OC                     |            | IDE              | 2,3,4,5      | Functional chat in place                                | :ballot_box_with_check: |                                                              |
 | 8    | History Storage and Retrieval      | SG, OC                 |            | IDE              | 2,3,4,5,6    | Chat history retrievable by clients                 |:ballot_box_with_check:     |                                                              |
-| 9    | Polished Client UI                 | SG                     | 2019-04-29           | IDE              | 2,3,4,5,6,7  | Implementation of chat program done                     |           |                                                              |
+| 9    | Polished Client UI                 | SG, OC                     | 2019-04-29           | IDE              | 2,3,4,5,6,7  | Implementation of chat program done                     |           |                                                              |
 ## Notes
 
 Tam Nguyen has opted not to contribute to the group project and build a standalone network program for his own education.
