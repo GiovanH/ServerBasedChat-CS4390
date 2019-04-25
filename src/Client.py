@@ -443,17 +443,17 @@ class RunnableClient(BaseClient):
     #         # Cleanup
     #         pass
 
-    def cmd_say(self, *args):
-        """Send a CHAT message
+    # def cmd_say(self, *args):
+    #     """Send a CHAT message
 
-        Args:
-            Message
-        """
-        print("tcp say:", args)
-        self.sendTCP([
-            Code.CHAT,
-            " ".join(args)
-        ])
+    #     Args:
+    #         Message
+    #     """
+    #     print("tcp say:", args)
+    #     self.sendTCP([
+    #         Code.CHAT,
+    #         " ".join(args)
+    #     ])
 
     def cmd_history(self, *args):
         """Request chat history between you and another user.
