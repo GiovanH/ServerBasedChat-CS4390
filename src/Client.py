@@ -334,12 +334,11 @@ class RunnableClient(BaseClient):
             print(formatChatMessage(self.session_partner, message, self.id))
         elif code == Code.HISTORY_RESP.value:
             # print("client got args" + repr(args))
-            #(client_id_b, message, *rest) = args
 
             (sessNum, client_id_b, message, *rest) = args
-            if sessNum != "0": # Not end of a session
-                if sessNum != "-1": # Not empty history
-                    print("Session " + sessNum + ": ", end = "")
+            if sessNum != "0":  # Not end of a session
+                if sessNum != "-1":  # Not empty history
+                    print("Session " + sessNum + ": ", end="")
                 print(formatChatMessage(client_id_b, message))
 
             # print("msg only: "+ message)
@@ -373,7 +372,7 @@ class RunnableClient(BaseClient):
         from prompt_toolkit import PromptSession
         # from prompt_toolkit.completion import WordCompleter
         from prompt_toolkit.patch_stdout import patch_stdout
-        
+
         self.p = p = prompt.Prompt()
         p.pstr = "{} > ".format(self.id)
         p.registerCommandsFromNamespace(self, "cmd_")
@@ -403,7 +402,7 @@ class RunnableClient(BaseClient):
         # self.prompt_event = threading.Event()
 
         # We implement our own prompt system that differentiates between
-        # chat input and command input. 
+        # chat input and command input.
         try:
             while True:
                 with patch_stdout():
@@ -427,7 +426,7 @@ class RunnableClient(BaseClient):
     #     """
     #     from prompt_toolkit import PromptSession
     #     from prompt_toolkit.patch_stdout import patch_stdout
-        
+
     #     self.ps = PromptSession(
     #         bottom_toolbar=self.bottomToolbar
     #     )
@@ -469,7 +468,6 @@ class RunnableClient(BaseClient):
             Code.HISTORY_REQ,
             client_id_b
         ])
-
 
     def cmd_chat(self, *args):
         """Start a chat session with another user.
