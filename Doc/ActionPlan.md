@@ -1,6 +1,6 @@
 # Action Plan
 
-Goal: Server-based chat program
+Goal: Server-Based Chat Program
 
 Start Date: 2019-02-01
 
@@ -26,20 +26,20 @@ Team Members:
 | 6    | Client Prompt and Messaging        | SG                     |            | IDE              | 2,3,4        | Chat between clients can be performed                   | :ballot_box_with_check: |                                                              |
 | 7    | Server Session Handling            | SG, OC                     |            | IDE              | 2,3,4,5      | Functional chat in place                                | :ballot_box_with_check: |                                                              |
 | 8    | History Storage and Retrieval      | SG, OC                 |            | IDE              | 2,3,4,5,6    | Chat history retrievable by clients                 |:ballot_box_with_check:     |                                                              |
-| 9    | Polished Client UI                 | SG, OC                     | 2019-04-29           | IDE              | 2,3,4,5,6,7  | Implementation of chat program done                     |           |                                                              |
+| 9    | Polished Client UI                 | SG, OC                     | 2019-04-29           | IDE              | 2,3,4,5,6,7  | Implementation of chat program done                     |           :ballot_box_with_check:|                                                              |
 ## Notes
 
 Tam Nguyen has opted not to contribute to the group project and build a standalone network program for his own education.
 
 ## Deadlines
 
-2019-02-26: Action plan due
+2019-02-26: Action Plan due
 
-2019-03-12: Status report due
+2019-03-12: Status Report #1 due
 
-2019-04-23: Status report due
+2019-04-29: Status Report #2 due
 
-2019-04-29: Final submission due
+2019-04-29: Final Submission due
 
 ### Components
 
@@ -53,7 +53,7 @@ Tam Nguyen has opted not to contribute to the group project and build a standalo
 - Clean up client UI
 
 
-Optimized/Real scenerio:
+Optimized/Real Scenario:
 
 ```mermaid
 gantt
@@ -72,13 +72,10 @@ Session handling	:done	session, after tcp, 10d
 History				:active	history, after session,	5d
 ```
 
-(Last updated: 2019-03-13)
-
 Final product ready 2019-04-14
 
 
-
-Worst case scenerio: 7d per component, minimal parallelism:
+Worst Case Scenario: 7d per component, minimal parallelism:
 
 ```mermaid
 gantt
@@ -96,5 +93,5 @@ Session handling	:	session, after prompt, 7d
 History				:	history, after session,	7d
 ```
 
-Final product ready 2019-04-14
+Final product Ready 2019-04-14
 
